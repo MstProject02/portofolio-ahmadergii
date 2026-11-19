@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Portofolio — Ahmad Ergi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+       1. VARIABLES & CUSTOM PROPERTIES
+    ========================================= */
+    @property --border-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    :root {
+      --bg-main: #0B0B0E;
+      --bg-card: #131318;
+      --bg-elevated: #1A1A22;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --accent-red: #E52531;
+      --accent-gradient: linear-gradient(135deg, #F02835 0%, #B8141E 100%);
+      --accent-glow: rgba(229, 37, 49, 0.35);
+      --text-primary: #F5F5F7;
+      --text-secondary: #9A9AA6;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background-color: var(--bg-main);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(180deg, #120B0D 0%, #0B0B0E 28%, #09090C 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    .font-display {
+      font-family: 'Anton', sans-serif;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1.08;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =========================================
+       2. FIXED GLASSMORPHISM CENTER HEADER
+    ========================================= */
+    header {
+      position: fixed;
+      top: 14px;
+      left: 0;
+      right: 0;
+      z-index: 150;
+      pointer-events: none;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .nav-center-dock {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.05) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      padding: 7px 10px 7px 16px;
+      border-radius: var(--radius-pill);
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    header.scrolled .nav-center-dock {
+      background: linear-gradient(135deg, rgba(38, 38, 46, 0.78) 0%, rgba(24, 24, 30, 0.85) 100%);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 4px;
+      transition: transform 0.25s var(--ease-smooth);
+    }
+
+    .logo-link:hover { transform: scale(1.05); }
+
+    .logo-img {
+      height: 28px;
+      width: auto;
+      max-width: 120px;
+      object-fit: contain;
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-btn {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-btn.active {
+      background: var(--accent-gradient);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .search-icon-btn, .mobile-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .search-icon-btn:hover {
+      background: var(--accent-red);
+      border-color: var(--accent-red);
+      transform: scale(1.06);
+    }
+
+    .search-icon-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 1.15rem;
+    }
+
+    /* =========================================
+       3. ANIMASI SCROLL REVEAL & TRANSISI TAB
+    ========================================= */
+    main {
+      flex: 1;
+      width: 100%;
+      padding-top: 76px;
+    }
+
+    #tab-home { margin-top: -76px; }
+
+    .tab-section {
+      display: none;
+      width: 100%;
+    }
+
+    .tab-section.active {
+      display: block;
+      animation: pageEnter 0.35s var(--ease-smooth) forwards;
+    }
+
+    @keyframes pageEnter {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth);
+      will-change: opacity, transform;
+    }
+
+    .reveal-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================
+       4. ULTRA-SMOOTH FEATHERED BORDER HOVER
+    ========================================= */
+    @keyframes smoothBorderFlow {
+      to { --border-angle: 360deg; }
+    }
+
+    .card-frame {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      transition: transform 0.32s var(--ease-smooth), box-shadow 0.32s ease, border-color 0.35s ease;
+      will-change: transform;
+    }
+
+    .card-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: conic-gradient(
+        from var(--border-angle),
+        rgba(229, 37, 49, 0.08) 0%,
+        rgba(229, 37, 49, 0.15) 20%,
+        rgba(255, 92, 102, 0.85) 38%,
+        #FF7A83 45%,
+        rgba(255, 92, 102, 0.85) 52%,
+        rgba(229, 37, 49, 0.15) 70%,
+        rgba(229, 37, 49, 0.08) 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .card-frame:hover {
+      transform: translateY(-5px);
+      border-color: rgba(229, 37, 49, 0.28);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55), 0 0 22px rgba(229, 37, 49, 0.2);
+    }
+
+    .card-frame:hover::after {
+      opacity: 1;
+      animation: smoothBorderFlow 3.6s linear infinite;
+    }
+
+    /* =========================================
+       5. HERO & PROFILE CARD
+    ========================================= */
+    .hero-banner {
+      background: radial-gradient(ellipse at 70% 15%, rgba(215, 30, 42, 0.28) 0%, rgba(30, 12, 16, 0.35) 48%, transparent 80%);
+      color: #FFFFFF;
+      padding: 124px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(5.5rem, 22vw, 18rem);
+      color: rgba(255, 255, 255, 0.022);
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 660px;
+    }
+
+    .hero-subtitle {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 2.2px;
+      color: #FF5C66;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 6vw, 4.3rem);
+      margin-bottom: 26px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #C4C4CE 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: transform 0.25s var(--ease-smooth), background 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary-glow {
+      background: var(--accent-gradient);
+      color: #FFFFFF;
+      box-shadow: 0 8px 22px var(--accent-glow);
+    }
+
+    .btn-primary-glow:hover {
+      background: linear-gradient(135deg, #FF3B47 0%, #CC1823 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(229, 37, 49, 0.45);
+    }
+
+    .btn-surface {
+      background: linear-gradient(145deg, #1E1E26 0%, #14141A 100%);
+      color: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-surface:hover {
+      background: var(--accent-gradient);
+      border-color: var(--accent-red);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    .profile-card-wrapper {
+      margin-top: -54px;
+      position: relative;
+      z-index: 5;
+      margin-bottom: 64px;
+    }
+
+    .profile-card {
+      background: linear-gradient(145deg, #17171E 0%, #101015 100%);
+      border-radius: var(--radius-lg);
+      padding: 38px;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.48);
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .profile-card > div {
+      min-width: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .profile-card-heading {
+      font-size: 1.75rem;
+      margin-bottom: 8px;
+    }
+
+    .profile-name {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #FF5C66;
+      margin-bottom: 12px;
+    }
+
+    .profile-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      line-height: 1.75;
+    }
+
+    .profile-photo-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .profile-photo {
+      width: 190px;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 22px;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+      transition: transform 0.35s var(--ease-smooth), border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .profile-card:hover .profile-photo {
+      transform: scale(1.04);
+      border-color: var(--accent-red);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.6), 0 0 18px rgba(229, 37, 49, 0.25);
+    }
+
+    /* =========================================
+       6. CLEAN PORTFOLIO CARDS & HOVER CAPTIONS
+    ========================================= */
+    .section-block { margin-bottom: 68px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      gap: 10px;
+    }
+
+    .section-title { font-size: clamp(1.65rem, 4vw, 2.4rem); }
+
+    .section-badge {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+    }
+
+    .poster-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .clean-media-card {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      cursor: pointer;
+    }
+
+    .clean-media-card img,
+    .yt-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.45s var(--ease-smooth);
+    }
+
+    .clean-media-card:hover img,
+    .yt-slide:hover img {
+      transform: scale(1.05);
+    }
+
+    .card-hover-caption {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9, 9, 12, 0) 38%, rgba(9, 9, 12, 0.76) 74%, rgba(9, 9, 12, 0.95) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      z-index: 3;
+    }
+
+    .clean-media-card:hover .card-hover-caption,
+    .clean-media-card:focus-within .card-hover-caption {
+      opacity: 1;
+    }
+
+    .hover-cap-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      transform: translateY(8px);
+      transition: transform 0.3s var(--ease-smooth);
+    }
+
+    .hover-cap-sub {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #FF6B73;
+      transform: translateY(8px);
+      transition: transform 0.3s var(--ease-smooth) 0.03s;
+    }
+
+    .clean-media-card:hover .hover-cap-title,
+    .clean-media-card:hover .hover-cap-sub {
+      transform: translateY(0);
+    }
+
+    .play-circle-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(14, 14, 18, 0.82);
+      border: 2px solid var(--accent-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      transition: transform 0.25s var(--ease-smooth), background 0.25s ease;
+      z-index: 2;
+    }
+
+    .play-circle-btn::after {
+      content: '';
+      border-style: solid;
+      border-width: 8px 0 8px 14px;
+      border-color: transparent transparent transparent #FFFFFF;
+      margin-left: 3px;
+    }
+
+    .clean-media-card:hover .play-circle-btn,
+    .yt-slide:hover .play-circle-btn {
+      background: var(--accent-red);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .center-action {
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    /* =========================================
+       7. TRUE SEAMLESS INFINITE CAROUSEL
+    ========================================= */
+    .carousel-wrapper {
+      background: linear-gradient(145deg, #16161D 0%, #0F0F14 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.48);
+    }
+
+    .carousel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 14px;
+    }
+
+    .carousel-top h3 { font-size: clamp(1.35rem, 3vw, 1.7rem); }
+
+    .carousel-controls {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .ctrl-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: #FFFFFF;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .ctrl-btn:hover {
+      background: var(--accent-red);
+      border-color: var(--accent-red);
+      transform: scale(1.06);
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 8px 0 4px;
+    }
+
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .yt-slide {
+      flex: 0 0 calc(50% - 9px);
+      aspect-ratio: 16 / 9;
+      min-width: 0;
+      cursor: pointer;
+    }
+
+    .yt-hover-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9, 9, 12, 0) 32%, rgba(9, 9, 12, 0.84) 76%, rgba(9, 9, 12, 0.96) 100%);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 18px;
+      gap: 12px;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      z-index: 3;
+    }
+
+    .yt-slide:hover .yt-hover-overlay { opacity: 1; }
+
+    .yt-hover-meta {
+      min-width: 0;
+      flex: 1;
+      transform: translateY(8px);
+      transition: transform 0.3s var(--ease-smooth);
+    }
+
+    .yt-slide:hover .yt-hover-meta { transform: translateY(0); }
+
+    .yt-hover-meta h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .yt-hover-meta p {
+      font-size: 0.8rem;
+      color: #FF6B73;
+      font-weight: 600;
+    }
+
+    .yt-ext-link {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-gradient);
+      flex-shrink: 0;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .yt-ext-link:hover {
+      background: #FF3B47;
+      transform: scale(1.04);
+    }
+
+    /* =========================================
+       8. TAB PORTOFOLIO & TAB CONTACT
+    ========================================= */
+    .portfolio-page, .contact-section {
+      padding: 24px 0 68px;
+    }
+
+    .filter-bar {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 30px;
+      max-width: 560px;
+    }
+
+    .filter-btn {
+      padding: 10px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-weight: 700;
+      font-size: 0.86rem;
+      transition: all 0.25s ease;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--accent-gradient);
+      border-color: var(--accent-red);
+      color: #FFFFFF;
+      box-shadow: 0 6px 18px var(--accent-glow);
+    }
+
+    .sub-heading-bar {
+      margin: 36px 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sub-heading-bar h3 { font-size: 1.35rem; }
+
+    .full-poster-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .full-video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .full-video-grid .yt-slide { flex: unset; width: 100%; }
+
+    .contact-card {
+      background: linear-gradient(145deg, #17171E 0%, #101015 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 42px;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.48);
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .contact-card > div { min-width: 0; }
+
+    .contact-title {
+      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      margin-bottom: 14px;
+    }
+
+    .contact-desc {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+
+    .social-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .social-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(145deg, #1E1E26 0%, #15151C 100%);
+      border: 1px solid var(--border-subtle);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.25s var(--ease-smooth), background 0.25s ease, border-color 0.25s ease;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .social-item:hover {
+      background: var(--accent-gradient);
+      border-color: var(--accent-red);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px var(--accent-glow);
+    }
+
+    .social-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .social-left > div { min-width: 0; flex: 1; }
+
+    .social-icon {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .social-handle {
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      word-break: break-word;
+      transition: color 0.25s ease;
+    }
+
+    .social-item:hover .social-handle { color: rgba(255, 255, 255, 0.92); }
+
+    /* =========================================
+       9. FOOTER
+    ========================================= */
+    footer {
+      background: linear-gradient(180deg, #09090C 0%, #050507 100%);
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 26px 0;
+      font-size: 0.84rem;
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer-socials {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .footer-social-btn:hover {
+      background: var(--accent-red);
+      border-color: var(--accent-red);
+      transform: translateY(-2px);
+    }
+
+    .footer-social-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* =========================================
+       10. LIGHTBOX & CENTERED SEARCH OVERLAY
+    ========================================= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      animation: fadeOverlay 0.2s ease;
+    }
+
+    @keyframes fadeOverlay {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-box {
+      background: #131317;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      max-width: 860px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+      color: #FFF;
+      animation: modalScale 0.25s var(--ease-smooth);
+    }
+
+    @keyframes modalScale {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-box.design-large-mode { max-width: 780px; }
+    .modal-box.vertical-video-mode { max-width: 380px; }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.82);
+      color: #FFF;
+      font-size: 1.15rem;
+      z-index: 10;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: background 0.2s ease;
+    }
+
+    .modal-close:hover { background: var(--accent-red); }
+
+    .modal-media {
+      background: #08080A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-media img {
+      width: auto;
+      max-width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+    }
+
+    .modal-video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      display: block;
+      background: #000;
+    }
+
+    .modal-tiktok-frame {
+      width: 100%;
+      height: 70vh;
+      max-height: 600px;
+      border: none;
+      display: block;
+      background: #000;
+    }
+
+    .local-preview-box {
+      position: relative;
+      width: 100%;
+      background: #0F0F12;
+      overflow: hidden;
+    }
+
+    .local-preview-bg {
+      width: 100%;
+      max-height: 56vh;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+
+    .local-preview-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      background: radial-gradient(circle, rgba(15, 15, 18, 0.45) 0%, rgba(15, 15, 18, 0.92) 100%);
+    }
+
+    .local-preview-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFD1D4;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 12px;
+    }
+
+    .local-preview-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .local-preview-note {
+      font-size: 0.85rem;
+      color: #CCCCCC;
+      max-width: 440px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .modal-caption {
+      padding: 16px 20px;
+      background: #131317;
+    }
+
+    /* Search Overlay: Rata Tengah & Adaptif */
+    .search-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 5, 8, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 950;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .search-overlay.open {
+      display: flex;
+      animation: fadeOverlay 0.2s ease;
+    }
+
+    .search-panel {
+      background: #15151B;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      width: 100%;
+      max-width: 600px;
+      border-radius: var(--radius-pill);
+      padding: 14px 16px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      animation: modalScale 0.22s ease;
+      transition: border-radius 0.25s var(--ease-smooth), padding 0.25s var(--ease-smooth);
+    }
+
+    .search-panel.expanded {
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+    }
+
+    .search-input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #1E1E26;
+      border: 1px solid var(--border-subtle);
+      padding: 10px 16px;
+      border-radius: var(--radius-pill);
+    }
+
+    .search-input-row svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--text-secondary);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.96rem;
+      color: #FFFFFF;
+      outline: none;
+      min-width: 0;
+    }
+
+    .search-input::placeholder { color: var(--text-secondary); }
+
+    .search-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .search-close-btn:hover { background: var(--accent-red); }
+
+    .search-results-list {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 54vh;
+      overflow-y: auto;
+      margin-top: 14px;
+    }
+
+    .search-results-list.has-query { display: flex; }
+
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      background: #1D1D24;
+      border: 1px solid var(--border-subtle);
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .search-result-item:hover {
+      background: var(--accent-red);
+      border-color: var(--accent-red);
+    }
+
+    .search-result-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .search-result-thumb {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #222;
+      flex-shrink: 0;
+    }
+
+    .search-result-info { min-width: 0; flex: 1; }
+
+    .search-result-title {
+      font-weight: 700;
+      font-size: 0.92rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .search-result-meta {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .search-result-item:hover .search-result-meta { color: rgba(255, 255, 255, 0.9); }
+
+    .search-type-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(229, 37, 49, 0.18);
+      color: #FF6B73;
+      flex-shrink: 0;
+    }
+
+    .search-result-item:hover .search-type-tag {
+      background: rgba(0, 0, 0, 0.3);
+      color: #FFFFFF;
+    }
+
+    .search-empty {
+      text-align: center;
+      padding: 18px 12px 8px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    /* =========================================
+       11. RESPONSIVE BREAKPOINTS (TABLET & HP)
+    ========================================= */
+    @media (max-width: 960px) {
+      .profile-card, .contact-card {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 32px 28px;
+        gap: 26px;
+      }
+
+      .profile-card { text-align: center; }
+      .profile-photo-box { order: -1; }
+
+      .full-poster-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container { padding: 0 20px; }
+      header { top: 10px; }
+
+      .nav-center-dock {
+        width: 100%;
+        justify-content: space-between;
+        padding: 6px 8px 6px 14px;
+      }
+
+      .nav-divider { display: none; }
+      .mobile-toggle { display: flex; }
+
+      .nav-links {
+        position: absolute;
+        top: 58px;
+        left: 20px;
+        right: 20px;
+        background: rgba(34, 34, 42, 0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 18px;
+        flex-direction: column;
+        padding: 12px;
+        gap: 6px;
+        display: none;
+        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.65);
+      }
+
+      .nav-links.show {
+        display: flex;
+        animation: fadeOverlay 0.2s ease;
+      }
+
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+        padding: 11px;
+      }
+
+      .hero-banner { padding: 106px 0 80px; }
+      .profile-card-wrapper { margin: -48px auto 48px; }
+      .profile-card, .contact-card { padding: 26px 22px; }
+      .profile-photo { width: 145px; height: 145px; }
+      .section-block { margin-bottom: 52px; }
+
+      .poster-grid-3 { gap: 10px; }
+      .card-frame { border-radius: 12px; }
+      .profile-card.card-frame { border-radius: 22px; }
+      .card-hover-caption { padding: 10px; }
+      .hover-cap-title { font-size: 0.74rem; }
+      .hover-cap-sub { font-size: 0.64rem; }
+
+      .play-circle-btn { width: 34px; height: 34px; }
+      .play-circle-btn::after { border-width: 6px 0 6px 10px; }
+
+      .carousel-wrapper { padding: 22px 18px; border-radius: 20px; }
+      .yt-slide { flex: 0 0 88%; }
+      .yt-hover-overlay { padding: 12px; }
+      .yt-hover-meta h4 { font-size: 0.86rem; }
+      .yt-ext-link { padding: 6px 10px; font-size: 0.7rem; }
+
+      .portfolio-page, .contact-section { padding: 16px 0 52px; }
+      .filter-bar { gap: 6px; max-width: 100%; }
+      .filter-btn { padding: 9px 4px; font-size: 0.78rem; }
+      .full-poster-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .full-video-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+      .social-item { padding: 15px 16px; }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .poster-grid-3 { gap: 8px; }
+      .filter-btn { font-size: 0.72rem; padding: 8px 2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= FIXED GLASSMORPHISM CENTER HEADER ================= -->
+  <header id="mainHeader">
+    <div class="container nav-wrapper">
+      <div class="nav-center-dock">
+        <a href="#home" class="logo-link" onclick="switchTab('home'); return false;" aria-label="Home">
+          <img id="ui-logo-img" src="" alt="Logo" class="logo-img" />
+        </a>
+
+        <span class="nav-divider"></span>
+
+        <ul class="nav-links" id="navLinks">
+          <li><button class="nav-btn active" data-tab="home" onclick="switchTab('home')">Home</button></li>
+          <li><button class="nav-btn" data-tab="portofolio" onclick="switchTab('portofolio')">Portofolio</button></li>
+          <li><button class="nav-btn" data-tab="contact" onclick="switchTab('contact')">Contact</button></li>
+        </ul>
+
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <button class="search-icon-btn" onclick="openSearch()" aria-label="Cari Portofolio" title="Cari Karya">
+            <svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
+            </svg>
+          </button>
+          <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Menu">☰</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= CENTERED SEARCH OVERLAY ================= -->
+  <div class="search-overlay" id="searchOverlay" onclick="closeSearch(event)">
+    <div class="search-panel" id="searchPanel">
+      <div class="search-input-row">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Ketik judul atau kategori untuk mencari..."
+          oninput="handleSearch(this.value)"
+        />
+        <button class="search-close-btn" onclick="forceCloseSearch()" aria-label="Tutup Pencarian">✕</button>
+      </div>
+      <div class="search-results-list" id="searchResultsList"></div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main>
+
+    <!-- ========== TAB 1: HOME ========== -->
+    <section id="tab-home" class="tab-section active">
+      <div class="hero-banner">
+        <div class="hero-bg-text">CREATIVE</div>
+        <div class="container">
+          <div class="hero-content reveal-item">
+            <p class="hero-subtitle" id="ui-subtitle"></p>
+            <h1 class="hero-title font-display" id="ui-hero-title"></h1>
+            <button class="btn-pill btn-primary-glow" onclick="switchTab('portofolio')">Lihat Portofolio</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KARTU TENTANG SAYA -->
+      <div class="container profile-card-wrapper">
+        <div class="profile-card card-frame reveal-item">
+          <div>
+            <h2 class="profile-card-heading font-display" id="ui-about-heading"></h2>
+            <p class="profile-name" id="ui-profile-name"></p>
+            <p class="profile-desc" id="ui-profile-bio"></p>
+            <button class="btn-pill btn-surface" onclick="switchTab('contact')">Hubungi Saya</button>
+          </div>
+          <div class="profile-photo-box">
+            <img id="ui-profile-photo" src="" alt="Foto Profil" class="profile-photo" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 DESIGN PORTRAIT -->
+      <div class="container section-block reveal-item">
+        <div class="section-header">
+          <h2 class="section-title font-display" id="ui-sec-design"></h2>
+        </div>
+        <div class="poster-grid-3" id="home-posters-grid"></div>
+        <div class="center-action">
+          <button class="btn-pill btn-surface" onclick="openPortfolioCategory('poster')">Semua Design</button>
+        </div>
+      </div>
+
+      <!-- 3 VIDEO VERTIKAL -->
+      <div class="container section-block reveal-item">
+        <div class="section-header">
+          <h2 class="section-title font-display" id="ui-sec-vertikal"></h2>
+        </div>
+        <div class="poster-grid-3" id="home-tiktok-grid"></div>
+        <div class="center-action">
+          <button class="btn-pill btn-surface" onclick="openPortfolioCategory('tiktok')">Semua Video Vertikal</button>
+        </div>
+      </div>
+
+      <!-- VIDEO HORIZONTAL SEAMLESS INFINITY CAROUSEL -->
+      <div class="container section-block reveal-item">
+        <div class="carousel-wrapper">
+          <div class="carousel-top">
+            <h3 class="font-display" id="ui-sec-horizontal"></h3>
+            <div class="carousel-controls">
+              <button class="ctrl-btn" onclick="scrollCarousel(-1)" aria-label="Sebelumnya">❮</button>
+              <button class="ctrl-btn" onclick="scrollCarousel(1)" aria-label="Berikutnya">❯</button>
+            </div>
+          </div>
+          <div class="carousel-track" id="home-yt-carousel"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 2: PORTOFOLIO LENGKAP ========== -->
+    <section id="tab-portofolio" class="tab-section">
+      <div class="container">
+        <div class="portfolio-page">
+          <div class="section-header reveal-item">
+            <h1 class="section-title font-display">SEMUA PORTOFOLIO</h1>
+          </div>
+
+          <div class="filter-bar reveal-item">
+            <button class="filter-btn active" data-filter="all" onclick="filterPortfolio('all', this)">All</button>
+            <button class="filter-btn" data-filter="poster" onclick="filterPortfolio('poster', this)">DESIGN</button>
+            <button class="filter-btn" data-filter="tiktok" onclick="filterPortfolio('tiktok', this)">VERTIKAL</button>
+            <button class="filter-btn" data-filter="youtube" onclick="filterPortfolio('youtube', this)">HORIZONTAL</button>
+          </div>
+
+          <div id="portfolio-poster-block" class="reveal-item">
+            <div class="sub-heading-bar">
+              <h3 class="font-display">FOTO, 3D, DESIGN</h3>
+            </div>
+            <div class="full-poster-grid" id="all-posters-grid"></div>
+          </div>
+
+          <div id="portfolio-tiktok-block" class="reveal-item">
+            <div class="sub-heading-bar">
+              <h3 class="font-display">KONTEN MEDIA SOSIAL</h3>
+            </div>
+            <div class="full-poster-grid" id="all-tiktok-grid"></div>
+          </div>
+
+          <div id="portfolio-youtube-block" class="reveal-item">
+            <div class="sub-heading-bar">
+              <h3 class="font-display">FILM PENDEK, SOFTNEWS, DOKUMENTER</h3>
+            </div>
+            <div class="full-video-grid" id="all-videos-grid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 3: CONTACT ========== -->
+    <section id="tab-contact" class="tab-section">
+      <div class="container">
+        <div class="contact-section">
+          <div class="contact-card reveal-item">
+            <div>
+              <span class="section-badge" style="margin-bottom: 14px; display: inline-block;" id="ui-contact-badge"></span>
+              <h1 class="contact-title font-display" id="ui-contact-title"></h1>
+              <p class="contact-desc" id="ui-contact-desc"></p>
+              <p style="font-size: 0.9rem; font-weight: 600; color: #FF5C66;" id="ui-contact-status"></p>
+            </div>
+
+            <div class="social-list" id="ui-contact-socials"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="container footer-inner">
+      <span id="ui-footer-text"></span>
+      <div class="footer-socials" id="ui-footer-socials"></div>
+    </div>
+  </footer>
+
+  <!-- ================= MODAL PREVIEW ================= -->
+  <div class="modal-overlay" id="previewModal" onclick="closeModal(event)">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" onclick="forceCloseModal()">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PUSAT DATA & KONTROL KONTEN (CUKUP EDIT BAGIAN INI SAJA!)
+  ========================================================= -->
+  <script>
+    const SITE_DATA = {
+      // 1. INFORMASI PROFIL & TEKS UTAMA
+      profile: {
+        logoImage: "assets/logo.png",
+        subtitle: "Content Creator  |   Videographer    |   Editor",
+        heroTitle: "SELAMAT DATANG DIRUANG KREATIF SAYA",
+        aboutHeading: "TENTANG SAYA",
+        fullName: "Ahmad Ergi Pamungkas",
+        bio: "Halo! Saya seorang content creator, videographer, dan editor yang memiliki ketertarikan di dunia kreatif, khususnya dalam pembuatan konten visual. Saya suka mengabadikan momen, mengambil gambar, dan mengolah video menjadi sebuah karya yang menarik. Saya selalu berusaha mengembangkan kreativitas dan kemampuan untuk menghasilkan konten yang punya karakter dan cerita tersendiri.",
+        photo: "assets/profil.jpg",
+        footerText: "© 2026 Ahmad Ergi"
+      },
+
+      // 2. JUDUL BAGIAN (SECTION HEADINGS)
+      sections: {
+        designTitle: "DESIGN",
+        vertikalTitle: "VIDEO VERTIKAL",
+        horizontalTitle: "VIDEO HORIZONTAL"
+      },
+
+      // 3. HALAMAN KONTAK & MEDIA SOSIAL
+      contact: {
+        badge: "KOLABORASI",
+        title: "HUBUNGI SAYA",
+        description: "Tertarik untuk bekerja sama dalam pembuatan konten, videografi, maupun editing video? Jangan ragu untuk menghubungi saya, saya terbuka untuk peluang dan kolaborasi baru!",
+        statusText: "Berikut Sosial Media Saya",
+        whatsapp: {
+          number: "6285899348081", // Awali dengan 62 tanpa + atau spasi
+          display: "+62 858-9934-8081",
+          message: "Halo, saya tertarik dengan portofolio Anda"
+        },
+        instagram: {
+          username: "@ahmadergii",
+          url: "https://instagram.com/ahmadergii"
+        },
+        tiktok: {
+          username: "@ahmdrg_",
+          url: "https://tiktok.com/@ahmdrg_"
+        }
+      },
+
+      // 4. DAFTAR DESIGN LOKAL (Copy-paste blok { ... } untuk menambah)
+      posters: [
+        {
+          title: "Flat Design",
+          category: "Shutterstock",
+          image: "assets/poster-1.jpg"
+        },
+        {
+          title: "Flat Design",
+          category: "Shutterstock",
+          image: "assets/poster-2.jpg"
+        },
+        {
+          title: "Flat Design",
+          category: "Shutterstock",
+          image: "assets/poster-3.jpg"
+        },
+        {
+          title: "Flat Design",
+          category: "Shutterstock",
+          image: "assets/poster-4.jpg"
+        }
+      ],
+
+      // 5. DAFTAR VIDEO VERTIKAL (Thumbnail Lokal + Paste Link TikTok / YouTube Shorts)
+      tiktoks: [
+        {
+          title: "B-Roll",
+          category: "Konten Sosial Media",
+          image: "assets/tiktok-1.jpg",
+          url: "https://www.tiktok.com/@ahmdrg_/video/7434513999879785735"
+        },
+        {
+          title: "Membuat Keyless Menggunakan Arduino",
+          category: "Konten Sosial Media",
+          image: "assets/tiktok-2.jpg",
+          url: "https://www.tiktok.com/@ahmdrg_/video/7329122694551850245"
+        },
+        {
+          title: "Servis Motor",
+          category: "Konten Sosial Media",
+          image: "assets/tiktok-3.jpg",
+          url: "https://www.tiktok.com/@ahmdrg_/video/7333941399492087045"
+        },
+        {
+          title: "B-Roll",
+          category: "Konten Sosial Media",
+          image: "assets/tiktok-4.jpg",
+          url: "https://www.tiktok.com/@tiktok/video/7106594312292453675"
+        }
+      ],
+
+      // 6. DAFTAR VIDEO HORIZONTAL (Cukup Paste Link YouTube Apa Saja)
+      videos: [
+        {
+          title: "DREAMTALK",
+          role: "Tahun 2022",
+          url: "https://youtu.be/wAhvzTMfBbs?si=t8xcI2i57cH5Dt4j"
+        },
+        {
+          title: "RELEAT",
+          role: "Tahun 2021",
+          url: "https://youtu.be/DaSADMWXp4Y?si=H578PEvvhmVKqT6O"
+        },
+        {
+          title: "We Quiz",
+          role: "Tahun 2021",
+          url: "https://youtu.be/6BTpAOx55kc?si=rkBDnDinJrKwGB_J"
+        },
+        {
+          title: "Music Video",
+          role: "Tahun 2021",
+          url: "https://youtu.be/2ydWHkihUh8?si=c25Sg5kwX8iP4NH-"
+        }
+      ]
+    };
+
+    /* =========================================================
+       ENGINE & HELPERS (TIDAK PERLU DIEDIT)
+    ========================================================= */
+    const IS_LOCAL_FILE = window.location.protocol === 'file:';
+
+    const SOCIAL_ICONS = {
+      whatsapp: `<svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" /><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" /></svg>`,
+      instagram: `<svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>`,
+      tiktok: `<svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>`
+    };
+
+    function extractYoutubeId(url) {
+      if (!url) return "";
+      const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+      return match ? match[1] : "";
+    }
+
+    function extractTiktokId(url) {
+      if (!url) return "";
+      const match = url.match(/\/video\/(\d+)/);
+      return match ? match[1] : "";
+    }
+
+    // Universal Card Renderer
+    function renderMediaCard(type, item, index) {
+      if (type === 'youtube') {
+        const videoId = extractYoutubeId(item.url);
+        const thumbUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+        const ytUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        return `
+          <article class="yt-slide card-frame" onclick="openMediaModal('youtube', ${index})">
+            <img src="${thumbUrl}" alt="${item.title}" loading="lazy" />
+            <div class="play-circle-btn"></div>
+            <div class="yt-hover-overlay">
+              <div class="yt-hover-meta">
+                <h4>${item.title}</h4>
+                <p>${item.role}</p>
+              </div>
+              <a href="${ytUrl}" target="_blank" rel="noopener" class="yt-ext-link" onclick="event.stopPropagation()">YouTube</a>
+            </div>
+          </article>
+        `;
+      }
+
+      const playBadge = type === 'tiktok' ? '<div class="play-circle-btn"></div>' : '';
+      return `
+        <article class="clean-media-card card-frame" onclick="openMediaModal('${type}', ${index})">
+          <img src="${item.image}" alt="${item.title}" loading="lazy" />
+          ${playBadge}
+          <div class="card-hover-caption">
+            <h3 class="hover-cap-title">${item.title}</h3>
+            <p class="hover-cap-sub">${item.category}</p>
+          </div>
+        </article>
+      `;
+    }
+
+    function initSite() {
+      const { profile, sections, contact, posters, tiktoks, videos } = SITE_DATA;
+
+      // 1. Render Profil & Judul
+      document.getElementById('ui-logo-img').src = profile.logoImage;
+      document.getElementById('ui-subtitle').textContent = profile.subtitle;
+      document.getElementById('ui-hero-title').textContent = profile.heroTitle;
+      document.getElementById('ui-about-heading').textContent = profile.aboutHeading;
+      document.getElementById('ui-profile-name').textContent = profile.fullName;
+      document.getElementById('ui-profile-bio').textContent = profile.bio;
+      document.getElementById('ui-profile-photo').src = profile.photo;
+      document.getElementById('ui-footer-text').textContent = profile.footerText;
+
+      document.getElementById('ui-sec-design').textContent = sections.designTitle;
+      document.getElementById('ui-sec-vertikal').textContent = sections.vertikalTitle;
+      document.getElementById('ui-sec-horizontal').textContent = sections.horizontalTitle;
+
+      // 2. Render Kontak & Footer Sosmed Secara Dinamis
+      document.getElementById('ui-contact-badge').textContent = contact.badge;
+      document.getElementById('ui-contact-title').textContent = contact.title;
+      document.getElementById('ui-contact-desc').textContent = contact.description;
+      document.getElementById('ui-contact-status').textContent = contact.statusText;
+
+      const waHref = `https://wa.me/${contact.whatsapp.number}?text=${encodeURIComponent(contact.whatsapp.message)}`;
+      const socialItems = [
+        { key: 'whatsapp', label: 'WhatsApp', handle: contact.whatsapp.display, url: waHref },
+        { key: 'instagram', label: 'Instagram', handle: contact.instagram.username, url: contact.instagram.url },
+        { key: 'tiktok', label: 'TikTok', handle: contact.tiktok.username, url: contact.tiktok.url }
+      ];
+
+      document.getElementById('ui-contact-socials').innerHTML = socialItems.map(s => `
+        <a href="${s.url}" target="_blank" rel="noopener" class="social-item">
+          <div class="social-left">
+            ${SOCIAL_ICONS[s.key]}
+            <div>
+              <div>${s.label}</div>
+              <div class="social-handle">${s.handle}</div>
+            </div>
+          </div>
+        </a>
+      `).join('');
+
+      document.getElementById('ui-footer-socials').innerHTML = socialItems.map(s => `
+        <a href="${s.url}" target="_blank" rel="noopener" class="footer-social-btn" aria-label="${s.label}" title="${s.label}">
+          ${SOCIAL_ICONS[s.key].replace('class="social-icon"', '')}
+        </a>
+      `).join('');
+
+      // 3. Render Galeri Home & Portofolio
+      document.getElementById('home-posters-grid').innerHTML =
+        posters.slice(0, 3).map((item, idx) => renderMediaCard('poster', item, idx)).join('');
+
+      document.getElementById('home-tiktok-grid').innerHTML =
+        tiktoks.slice(0, 3).map((item, idx) => renderMediaCard('tiktok', item, idx)).join('');
+
+      const carouselTrack = document.getElementById('home-yt-carousel');
+      const doubledVideos = [...videos, ...videos];
+      carouselTrack.innerHTML = doubledVideos
+        .map((item, idx) => renderMediaCard('youtube', item, idx % videos.length))
+        .join('');
+      setupSeamlessCarouselLoop(carouselTrack);
+
+      document.getElementById('all-posters-grid').innerHTML =
+        posters.map((item, idx) => renderMediaCard('poster', item, idx)).join('');
+
+      document.getElementById('all-tiktok-grid').innerHTML =
+        tiktoks.map((item, idx) => renderMediaCard('tiktok', item, idx)).join('');
+
+      document.getElementById('all-videos-grid').innerHTML =
+        videos.map((item, idx) => renderMediaCard('youtube', item, idx)).join('');
+
+      initScrollReveal();
+    }
+
+    /* =========================================================
+       SEAMLESS INFINITY CAROUSEL
+    ========================================================= */
+    function setupSeamlessCarouselLoop(track) {
+      let isAdjusting = false;
+      track.addEventListener('scroll', () => {
+        if (isAdjusting) return;
+        const halfWidth = track.scrollWidth / 2;
+        if (halfWidth > 0 && track.scrollLeft >= halfWidth) {
+          isAdjusting = true;
+          track.style.scrollBehavior = 'auto';
+          track.scrollLeft -= halfWidth;
+          requestAnimationFrame(() => {
+            track.style.scrollBehavior = 'smooth';
+            isAdjusting = false;
+          });
+        }
+      }, { passive: true });
+    }
+
+    function scrollCarousel(direction) {
+      const track = document.getElementById('home-yt-carousel');
+      const slides = track.querySelectorAll('.yt-slide');
+      if (!slides.length) return;
+
+      const slideStep = slides[0].offsetWidth + 18;
+      const halfWidth = track.scrollWidth / 2;
+
+      if (direction === 1) {
+        track.style.scrollBehavior = 'smooth';
+        track.scrollBy({ left: slideStep, behavior: 'smooth' });
+      } else if (track.scrollLeft <= 10) {
+        track.style.scrollBehavior = 'auto';
+        track.scrollLeft = halfWidth;
+        requestAnimationFrame(() => {
+          track.style.scrollBehavior = 'smooth';
+          track.scrollBy({ left: -slideStep, behavior: 'smooth' });
+        });
+      } else {
+        track.style.scrollBehavior = 'smooth';
+        track.scrollBy({ left: -slideStep, behavior: 'smooth' });
+      }
+    }
+
+    /* =========================================================
+       NAVIGATION, SCROLL REVEAL & FILTER
+    ========================================================= */
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 24);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    let scrollObserver;
+    function initScrollReveal() {
+      if (scrollObserver) scrollObserver.disconnect();
+      scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            scrollObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      document.querySelectorAll('.tab-section.active .reveal-item').forEach((el, idx) => {
+        el.classList.remove('is-visible');
+        el.style.transitionDelay = `${Math.min(idx * 60, 240)}ms`;
+        scrollObserver.observe(el);
+      });
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(`tab-${tabName}`).classList.add('active');
+      const activeBtn = document.querySelector(`.nav-btn[data-tab="${tabName}"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.getElementById('navLinks').classList.remove('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      initScrollReveal();
+    }
+
+    function openPortfolioCategory(category) {
+      switchTab('portofolio');
+      const targetBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
+      if (targetBtn) filterPortfolio(category, targetBtn);
+    }
+
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('show');
+    });
+
+    function filterPortfolio(type, btnElement) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      document.getElementById('portfolio-poster-block').style.display = (type === 'all' || type === 'poster') ? 'block' : 'none';
+      document.getElementById('portfolio-tiktok-block').style.display = (type === 'all' || type === 'tiktok') ? 'block' : 'none';
+      document.getElementById('portfolio-youtube-block').style.display = (type === 'all' || type === 'youtube') ? 'block' : 'none';
+      initScrollReveal();
+    }
+
+    /* =========================================================
+       CENTERED CLEAN SEARCH
+    ========================================================= */
+    function openSearch() {
+      document.getElementById('navLinks').classList.remove('show');
+      const overlay = document.getElementById('searchOverlay');
+      const input = document.getElementById('searchInput');
+      const resultsContainer = document.getElementById('searchResultsList');
+      const panel = document.getElementById('searchPanel');
+
+      overlay.classList.add('open');
+      panel.classList.remove('expanded');
+      input.value = '';
+      resultsContainer.innerHTML = '';
+      resultsContainer.classList.remove('has-query');
+      setTimeout(() => input.focus(), 60);
+    }
+
+    function closeSearch(event) {
+      if (event.target.id === 'searchOverlay') forceCloseSearch();
+    }
+
+    function forceCloseSearch() {
+      document.getElementById('searchOverlay').classList.remove('open');
+    }
+
+    function handleSearch(keyword) {
+      const q = keyword.trim().toLowerCase();
+      const resultsContainer = document.getElementById('searchResultsList');
+      const panel = document.getElementById('searchPanel');
+
+      if (!q) {
+        resultsContainer.innerHTML = '';
+        resultsContainer.classList.remove('has-query');
+        panel.classList.remove('expanded');
+        return;
+      }
+
+      resultsContainer.classList.add('has-query');
+      panel.classList.add('expanded');
+      const results = [];
+
+      SITE_DATA.posters.forEach((item, index) => {
+        if (item.title.toLowerCase().includes(q) || item.category.toLowerCase().includes(q)) {
+          results.push({ type: 'Design', title: item.title, meta: item.category, thumb: item.image, action: `forceCloseSearch(); openMediaModal('poster', ${index});` });
+        }
+      });
+
+      SITE_DATA.tiktoks.forEach((item, index) => {
+        if (item.title.toLowerCase().includes(q) || item.category.toLowerCase().includes(q)) {
+          results.push({ type: 'Vertikal', title: item.title, meta: item.category, thumb: item.image, action: `forceCloseSearch(); openMediaModal('tiktok', ${index});` });
+        }
+      });
+
+      SITE_DATA.videos.forEach((item, index) => {
+        if (item.title.toLowerCase().includes(q) || item.role.toLowerCase().includes(q)) {
+          const videoId = extractYoutubeId(item.url);
+          results.push({ type: 'Horizontal', title: item.title, meta: item.role, thumb: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`, action: `forceCloseSearch(); openMediaModal('youtube', ${index});` });
+        }
+      });
+
+      if (results.length === 0) {
+        resultsContainer.innerHTML = `<div class="search-empty">Tidak ada karya yang cocok dengan "${keyword}".</div>`;
+        return;
+      }
+
+      resultsContainer.innerHTML = results.map(r => `
+        <div class="search-result-item" onclick="${r.action}">
+          <div class="search-result-left">
+            <img src="${r.thumb}" alt="${r.title}" class="search-result-thumb" />
+            <div class="search-result-info">
+              <div class="search-result-title">${r.title}</div>
+              <div class="search-result-meta">${r.meta}</div>
+            </div>
+          </div>
+          <span class="search-type-tag">${r.type}</span>
+        </div>
+      `).join('');
+    }
+
+    /* =========================================================
+       UNIFIED LIGHTBOX MODAL PREVIEW
+    ========================================================= */
+    function openMediaModal(type, index) {
+      const modal = document.getElementById('previewModal');
+      const box = document.getElementById('modalBox');
+      const content = document.getElementById('modalContent');
+
+      if (type === 'poster') {
+        const item = SITE_DATA.posters[index];
+        if (!item) return;
+        box.className = 'modal-box design-large-mode';
+        content.innerHTML = `
+          <div class="modal-media"><img src="${item.image}" alt="${item.title}" /></div>
+          <div class="modal-caption">
+            <h3 style="font-size: 1.1rem;">${item.title}</h3>
+            <p style="font-size: 0.85rem; color: #AAA;">${item.category}</p>
+          </div>
+        `;
+      } else if (type === 'tiktok') {
+        const item = SITE_DATA.tiktoks[index];
+        if (!item) return;
+        const tiktokId = extractTiktokId(item.url);
+        const ytShortId = extractYoutubeId(item.url);
+        box.className = 'modal-box vertical-video-mode';
+
+        if (IS_LOCAL_FILE) {
+          content.innerHTML = renderLocalPreview(item.image, item.title, item.url, "Pemutar video otomatis aktif di dalam modal setelah website dibuka lewat Live Server atau di-publish online (Vercel/GitHub).");
+        } else if (tiktokId) {
+          content.innerHTML = `
+            <iframe class="modal-tiktok-frame" src="https://www.tiktok.com/embed/v2/${tiktokId}" title="${item.title}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+            <div class="modal-caption" style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+              <h3 style="font-size: 0.95rem;">${item.title}</h3>
+              <a href="${item.url}" target="_blank" rel="noopener" class="yt-ext-link">Buka Video</a>
+            </div>
+          `;
+        } else if (ytShortId) {
+          const originParam = encodeURIComponent(window.location.origin);
+          content.innerHTML = `
+            <iframe class="modal-tiktok-frame" src="https://www.youtube.com/embed/${ytShortId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&origin=${originParam}" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+            <div class="modal-caption" style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+              <h3 style="font-size: 0.95rem;">${item.title}</h3>
+              <a href="${item.url}" target="_blank" rel="noopener" class="yt-ext-link">Buka Video</a>
+            </div>
+          `;
+        } else {
+          content.innerHTML = `
+            <div style="padding: 48px 24px; text-align: center;">
+              <h3 style="margin-bottom: 10px;">${item.title}</h3>
+              <p style="font-size: 0.88rem; color: #BBBBBB; margin-bottom: 20px;">Klik tombol di bawah untuk menonton video secara penuh.</p>
+              <a href="${item.url}" target="_blank" rel="noopener" class="btn-pill btn-primary-glow">Tonton Video</a>
+            </div>
+          `;
+        }
+      } else if (type === 'youtube') {
+        const item = SITE_DATA.videos[index];
+        if (!item) return;
+        const videoId = extractYoutubeId(item.url);
+        const ytWatchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        const thumbHighRes = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+        box.className = 'modal-box';
+
+        if (IS_LOCAL_FILE) {
+          content.innerHTML = renderLocalPreview(thumbHighRes, item.title, ytWatchUrl, "YouTube membatasi pemutar embed saat file dibuka langsung dari folder komputer (file://). Setelah di-upload ke Vercel/GitHub, video akan langsung berputar otomatis di kotak ini.", item.role);
+        } else {
+          const originParam = encodeURIComponent(window.location.origin);
+          content.innerHTML = `
+            <iframe class="modal-video-frame" src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&origin=${originParam}" title="${item.title}" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+            <div class="modal-caption" style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+              <div>
+                <h3 style="font-size: 1rem;">${item.title}</h3>
+                <p style="font-size: 0.8rem; color: #AAA;">${item.role}</p>
+              </div>
+              <a href="${ytWatchUrl}" target="_blank" rel="noopener" class="yt-ext-link">Buka di YouTube</a>
+            </div>
+          `;
+        }
+      }
+
+      modal.classList.add('open');
+    }
+
+    function renderLocalPreview(bgImg, title, url, note, subRole = "") {
+      const captionBlock = subRole
+        ? `<div class="modal-caption"><h3 style="font-size: 1rem;">${title}</h3><p style="font-size: 0.82rem; color: #AAA;">${subRole}</p></div>`
+        : "";
+      return `
+        <div class="local-preview-box">
+          <img src="${bgImg}" alt="${title}" class="local-preview-bg" />
+          <div class="local-preview-overlay">
+            <span class="local-preview-badge">Mode Preview File Lokal</span>
+            <h3 class="local-preview-title">${title}</h3>
+            <p class="local-preview-note">${note}</p>
+            <a href="${url}" target="_blank" rel="noopener" class="btn-pill btn-primary-glow">Tonton Video</a>
+          </div>
+        </div>
+        ${captionBlock}
+      `;
+    }
+
+    function closeModal(event) {
+      if (event.target.id === 'previewModal') forceCloseModal();
+    }
+
+    function forceCloseModal() {
+      const modal = document.getElementById('previewModal');
+      modal.classList.remove('open');
+      document.getElementById('modalContent').innerHTML = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        forceCloseSearch();
+        forceCloseModal();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', initSite);
+  </script>
+</body>
+</html>
